@@ -9,12 +9,8 @@ class Solution {
         double r = myPow(x,n/2);
         if(n%2==0)
             return r*r;
-        else
-        {
-            if(n<0)
-                return r*r*(1/x);
-            else
-                return r*r*x;
-        }
+        if(n<0)
+            return r*r*(1/x);
+        return r*r*x;
     }
 }
