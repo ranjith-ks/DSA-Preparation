@@ -8,6 +8,7 @@ Transform #2: 17 ➝ 1 + 7 ➝ 8
 Return the resulting integer after performing the operations described above.
 */
 
+/*
 class Solution {
     public int getLucky(String s, int k) {
         String num = "";
@@ -21,6 +22,31 @@ class Solution {
         int res = 0;
         for(int i=0;i<num.length();i++)
             res += num.charAt(i)-'0';
+        while(--k>0&&res>9)
+            res = sumOfdig(res);
+        return res;
+    }
+    public int sumOfdig(int n)
+    {
+        int res=0;
+        while(n>0)
+        {
+            res += n%10;
+            n /= 10;
+        }
+        return res;
+    }
+}
+*/
+
+class Solution {
+    public int getLucky(String s, int k) {
+        int res = 0,temp;
+        for(int i=0;i<s.length();i++)
+        {
+            temp = s.charAt(i)-'a' + 1;
+            res += temp<10?temp:temp/10+temp%10;
+        }
         while(--k>0&&res>9)
             res = sumOfdig(res);
         return res;
