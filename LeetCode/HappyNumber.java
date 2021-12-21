@@ -7,15 +7,42 @@ Those numbers for which this process ends in 1 are happy.
 Return true if n is a happy number, and false if not.
 */
 
+/*
 class Solution {
     public boolean isHappy(int n) {
-       Set<Integer> set = new HashSet<>(); 
+       Set<Integer> set = new HashSet<>();
        while(set.add(n))
        {
            if(n==1)
                return true;
            n = sumOfsq(n);
        }
+        return false;
+    }
+    public int sumOfsq(int n)
+    {
+        int res=0,rem;
+        while(n>0)
+        {
+            rem = n%10;
+            res += rem*rem;
+            n /= 10;
+        }
+        return res;
+    }
+}
+*/
+
+class Solution {
+    public boolean isHappy(int n) {
+        int f = n,s = n;
+        do
+        {
+            f = sumOfsq(sumOfsq(f));
+            s = sumOfsq(s);
+            if(s==1)
+                return true;
+        }while(s!=f);
         return false;
     }
     public int sumOfsq(int n)
