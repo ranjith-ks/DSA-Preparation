@@ -9,7 +9,7 @@ For each test case print the answer — the minimum number of moves you need to 
 
 import java.util.*;
 
-public class Divisiblity
+public class Divisibility
 {
     public static int minMoves(int a,int b)
     {
