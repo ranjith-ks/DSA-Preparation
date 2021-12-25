@@ -5,6 +5,7 @@ You may assume that each input would have exactly one solution, and you may not 
 
 You can return the answer in any order.
 */
+/*
 class Solution {
     public int[] twoSum(int[] nums, int target) {
         int i,j;
@@ -29,6 +30,26 @@ class Solution {
             }
         }
 
+        return res;
+    }
+}
+*/
+
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        int i,n=nums.length;
+        int res[] = new int[2];
+        Map<Integer,Integer> hm = new HashMap<>();
+        for(i=0;i<n;i++)
+        {
+            if(hm.containsKey(target-nums[i]))
+            {
+                res[0] = hm.get(target-nums[i]);
+                res[1] = i;
+                return res;
+            }
+            hm.put(nums[i],i);
+        }
         return res;
     }
 }
