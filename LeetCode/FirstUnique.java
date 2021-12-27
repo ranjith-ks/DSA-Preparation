@@ -2,6 +2,7 @@
 Given a string s, find the first non-repeating character in it and return its index. If it does not exist, return -1.
 */
 
+/*
 class Solution {
     public int firstUniqChar(String s) {
         Map<Character,Integer> hm = new HashMap<>();
@@ -18,6 +19,21 @@ class Solution {
         {
             if(hm.get(s.charAt(i))==1)
                 return i;
+        }
+        return -1;
+    }
+}
+*/
+
+class Solution {
+    public int firstUniqChar(String s) {
+        int i,n=s.length();
+        for(i=0;i<n;i++)
+        {
+            int index = s.indexOf(s.charAt(i));
+            int lastIndex = s.lastIndexOf(s.charAt(i));
+            if(index==lastIndex)
+                return index;
         }
         return -1;
     }
