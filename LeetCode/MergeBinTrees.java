@@ -4,7 +4,7 @@ Imagine that when you put one of them to cover the other, some nodes of the two 
 Return the merged tree.
 Note: The merging process must start from the root nodes of both trees.
 */
-
+/*
 class Solution {
     public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
         TreeNode root = merge(root1,root2);
@@ -28,6 +28,27 @@ class Solution {
             root.right = merge(r1.right,null);
             return root;
         }
+        var root = new TreeNode(r1.val+r2.val);
+        root.left = merge(r1.left,r2.left);
+        root.right = merge(r1.right,r2.right);
+        return root;
+    }
+}
+*/
+
+class Solution {
+    public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
+        TreeNode root = merge(root1,root2);
+        return root;
+    }
+    private TreeNode merge(TreeNode r1,TreeNode r2)
+    {
+        if(r1==null && r2==null)
+            return null;
+        if(r1==null)
+            return r2;
+        if(r2==null)
+            return r1;
         var root = new TreeNode(r1.val+r2.val);
         root.left = merge(r1.left,r2.left);
         root.right = merge(r1.right,r2.right);
