@@ -7,6 +7,7 @@ arr[0] < arr[1] < ... < arr[i - 1] < arr[i]
 arr[i] > arr[i + 1] > ... > arr[arr.length - 1]
 */
 
+/*
 class Solution {
     public boolean validMountainArray(int[] arr) {
         int i,n=arr.length;
@@ -25,5 +26,17 @@ class Solution {
             if(arr[i]<=arr[i+1])
                 return false;
         return true;
+    }
+}
+*/
+
+class Solution {
+    public boolean validMountainArray(int[] arr) {
+        int i=0,n=arr.length,j=n-1;
+        if(n<3)
+            return false;
+        while(i<n-1 && arr[i]<arr[i+1]) i++;
+        while(j>0 && arr[j]<arr[j-1]) j--;
+        return i>0&&j<n-1&&i==j;
     }
 }
