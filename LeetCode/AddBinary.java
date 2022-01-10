@@ -1,7 +1,7 @@
 /*
 Given two binary strings a and b, return their sum as a binary string.
 */
-
+/*
 class Solution {
     public String addBinary(String a, String b) {
         StringBuilder res = new StringBuilder();
@@ -51,6 +51,30 @@ class Solution {
             j--;
         }
         if(c==1)
+            res.append("1");
+        res = res.reverse();
+        return res.toString();
+    }
+}
+*/
+
+class Solution {
+    public String addBinary(String a, String b) {
+        StringBuilder res = new StringBuilder();
+        int i = a.length()-1,j = b.length()-1, carry = 0, sum;
+
+        while(i>-1 || j>-1)
+        {
+            sum = carry;
+            sum += i>-1?a.charAt(i--)-'0':0;
+            sum += j>-1?b.charAt(j--)-'0':0;
+            if(sum%2==0)
+                res.append("0");
+            else
+                res.append("1");
+            carry = sum/2;
+        }
+        if(carry==1)
             res.append("1");
         res = res.reverse();
         return res.toString();
