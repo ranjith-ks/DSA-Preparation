@@ -4,6 +4,7 @@ You are given an integer array heights representing the current order that the s
 Return the number of indices where heights[i] != expected[i].
 */
 
+/*
 class Solution {
     public int heightChecker(int[] heights) {
         int i,n=heights.length,res=0;
@@ -14,6 +15,25 @@ class Solution {
         for(i=0;i<n;i++)
             if(heights[i]!=exp[i])
                 res++;
+        return res;
+    }
+}
+*/
+
+class Solution {
+    public int heightChecker(int[] heights) {
+        int n=heights.length,res=0,cur=0;
+        int freq[] = new int[101];
+        for(int h:heights)
+            freq[h]++;
+        for(int h:heights)
+        {
+            while(freq[cur]==0)
+                cur++;
+            if(cur!=h)
+                res++;
+            freq[cur]--;
+        }
         return res;
     }
 }
