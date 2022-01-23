@@ -13,6 +13,7 @@ skipB - The number of nodes to skip ahead in listB (starting from the head) to g
 The judge will then create the linked structure based on these inputs and pass the two heads, headA and headB to your program. If you correctly return the intersected node, then your solution will be accepted.
 */
 
+/*
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         Set<ListNode> set = new HashSet<>();
@@ -24,5 +25,18 @@ public class Solution {
                 return cur;
         }
         return null;
+    }
+}
+*/
+
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode a = headA, b = headB;
+        while(a!=b)
+        {
+            a = a==null?headB:a.next;
+            b = b==null?headA:b.next;
+        }
+        return a;
     }
 }
