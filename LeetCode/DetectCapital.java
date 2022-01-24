@@ -6,6 +6,7 @@ Only the first letter in this word is capital, like "Google".
 Given a string word, return true if the usage of capitals in it is right.
 */
 
+/*
 class Solution {
     public boolean detectCapitalUse(String word) {
         int n=word.length();
@@ -35,5 +36,20 @@ class Solution {
             if(isCapital(s.charAt(i)))
                 return false;
         return true;
+    }
+}
+*/
+
+class Solution {
+    public boolean detectCapitalUse(String word) {
+        int n=word.length(),cap=0;
+        for(int i=0;i<n;i++)
+            if(word.charAt(i)>='A' && word.charAt(i)<='Z')
+                cap++;
+        if(cap==n || cap==0)
+            return true;
+        if(cap==1 && (word.charAt(0)>='A' && word.charAt(0)<='Z'))
+            return true;
+        return false;
     }
 }
