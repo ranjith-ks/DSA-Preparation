@@ -4,6 +4,7 @@ The doctor advised Alice to only eat n / 2 of the candies she has (n is always e
 Given the integer array candyType of length n, return the maximum number of different types of candies she can eat if she only eats n / 2 of them.
 */
 
+/*
 class Solution {
     public int distributeCandies(int[] candyType) {
         Set<Integer> set = new HashSet<>();
@@ -11,5 +12,22 @@ class Solution {
         for(int i=0;i<n;i++)
             set.add(candyType[i]);
         return Math.min(n/2,set.size());
+    }
+}
+*/
+
+class Solution {
+    public int distributeCandies(int[] candyType) {
+        boolean set[] = new boolean[200001];
+        int res = candyType.length/2, type = 0;
+        for(int n: candyType)
+        {
+            n += 100000;
+            if(!set[n])
+                if(++type==res)
+                    return res;
+            set[n] = true;
+        }
+        return type;
     }
 }
