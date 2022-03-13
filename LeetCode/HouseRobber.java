@@ -24,6 +24,7 @@ class Solution {
 }
 */
 
+/*
 class Solution {
     public int rob(int[] nums) {
         int n = nums.length;
@@ -39,5 +40,25 @@ class Solution {
                 dp[i] += dp[i-2];
         }
         return Math.max(dp[n-1],dp[n-2]);
+    }
+}
+*/
+
+class Solution {
+    public int rob(int[] nums) {
+        int n = nums.length;
+        if(n==1)
+            return nums[0];
+        int adj1,adj2,adj3;
+        adj1 = adj2 = adj3 = 0;
+        for(int i=0;i<n;i++)
+        {
+            int x = nums[i];
+            x += Math.max(adj2,adj3);
+            adj3 = adj2;
+            adj2 = adj1;
+            adj1 = x;
+        }
+        return Math.max(adj1,adj2);
     }
 }
