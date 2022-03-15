@@ -7,6 +7,7 @@ It can be written as AB (A concatenated with B), where A and B are valid strings
 It can be written as (A), where A is a valid string.
 */
 
+/*
 class Solution {
     public String minRemoveToMakeValid(String s) {
         List<Character> l1 = new ArrayList<>();
@@ -53,5 +54,39 @@ class Solution {
         String res = l2.stream().map(Object::toString)
                         .collect(Collectors.joining(""));
         return res;
+    }
+}
+*/
+
+class Solution {
+    public String minRemoveToMakeValid(String s) {
+        int n = s.length();
+        char[] a = s.toCharArray();
+        int bracket=0;
+        for(int i=0;i<n;i++)
+        {
+            if(a[i]=='(')
+                bracket++;
+            else if(a[i]==')')
+            {
+                if(bracket==0)
+                    a[i] = '#';
+                else
+                    bracket--;
+            }
+        }
+        for(int i=n-1;i>-1;i--)
+        {
+            if(a[i]=='(' && bracket>0)
+            {
+                bracket--;
+                a[i] = '#';
+            }
+        }
+        StringBuilder res = new StringBuilder();
+        for(char c: a)
+            if(c!='#')
+                res.append(c);
+        return res.toString();
     }
 }
