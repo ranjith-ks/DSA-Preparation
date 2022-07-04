@@ -4,6 +4,7 @@ Two strings s and t are isomorphic if the characters in s can be replaced to get
 All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character, but a character may map to itself.
 */
 
+/*
 class Solution {
     public boolean isIsomorphic(String s, String t) {
         int sLen = s.length(),tLen = t.length();
@@ -22,6 +23,18 @@ class Solution {
                 m2.put(b,a);
             else if(m2.get(b)!=a)
                 return false;
+        }
+        return true;
+    }
+}
+*/
+
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        int[] map = new int[512];
+        for(int i=0;i<s.length();i++) {
+            if(map[s.charAt(i)] != map[t.charAt(i)+256]) return false;
+            map[s.charAt(i)] = map[t.charAt(i)+256] = i+1;
         }
         return true;
     }
