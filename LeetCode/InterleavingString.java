@@ -8,6 +8,7 @@ The interleaving is s1 + t1 + s2 + t2 + s3 + t3 + ... or t1 + s1 + t2 + s2 + t3 
 Note: a + b is the concatenation of strings a and b.
 */
 
+/*
 class Solution {
     public boolean isInterleave(String s1, String s2, String s3) {
         if(s1.length()+s2.length()!=s3.length())
@@ -25,5 +26,25 @@ class Solution {
             (j<b.length()&& b.charAt(j)==c.charAt(i+j) && isInterleave(a,b,c,i,j+1,dp));
         dp[i][j] = flag?1:0;
         return flag;
+    }
+}
+*/
+
+class Solution {
+    public boolean isInterleave(String a, String b, String c) {
+        int m = a.length(),n = b.length(),p = c.length();
+        if(m+n!=p) return false;
+        if(m>n) isInterleave(b,a,c);
+        boolean[] dp = new boolean[m+1];
+        dp[0] = true;
+        for(int i=1;i<=m;i++)
+            dp[i] = dp[i-1] && a.charAt(i-1)==c.charAt(i-1);
+        for(int j=1;j<=n;j++) {
+            dp[0] = dp[0] && b.charAt(j-1)==c.charAt(j-1);
+            for(int i=1;i<=m;i++)
+                dp[i] = (dp[i-1] && a.charAt(i-1)==c.charAt(i+j-1)) || 
+                        (dp[i] && b.charAt(j-1)==c.charAt(i+j-1));
+        }
+        return dp[m];
     }
 }
