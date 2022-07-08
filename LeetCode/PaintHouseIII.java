@@ -8,6 +8,7 @@ cost[i][j]: is the cost of paint the house i with the color j + 1.
 Return the minimum cost of painting all the remaining houses in such a way that there are exactly target neighborhoods. If it is not possible, return -1.
 */
 
+/*
 class Solution {
     private int mx = 10000001;
     public int minCost(int[] houses, int[][] cost, int m, int n, int target) {
@@ -45,5 +46,43 @@ class Solution {
             cost = Math.min(cost,temp);
         }
         return dp[i][p][g] = cost;
+    }
+}
+*/
+
+class Solution {
+    public int minCost(int[] houses, int[][] cost, int m, int n, int target) {
+        int mx = 10000001;
+        int[][][] dp = new int[m+1][n+1][target+2];
+        for(int[][] r2:dp)
+            for(int[] r:r2)
+                Arrays.fill(r,mx);
+        for(int i=1;i<=n;i++)
+            dp[m][i][target] = 0;
+        for(int i=m-1;i>-1;i--) {
+            for(int p=n;p>-1;p--) {
+                for(int g=target;g>-1;g--) {
+                    int min = mx,temp;
+                    if(houses[i]==0) {
+                        for(int j=1;j<=n;j++) {
+                            if(j==p)
+                                temp = cost[i][j-1] + dp[i+1][j][g];
+                            else
+                                temp = cost[i][j-1] + dp[i+1][j][g+1];
+                            min = Math.min(min,temp);
+                        }
+                    }
+                    else {
+                        if(houses[i]==p)
+                            min = dp[i+1][houses[i]][g];
+                        else
+                            min = dp[i+1][houses[i]][g+1];
+                    }
+                    dp[i][p][g] = min;
+                }
+            }
+        }
+        int res = dp[0][0][0];
+        return res==mx?-1:res;
     }
 }
